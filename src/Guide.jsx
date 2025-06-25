@@ -13,14 +13,14 @@ const Guide = () => {
   const askAI = async () => {
     setLoading(true);
     try {
-      const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-        method: 'POST',
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
         headers: {
-          'Authorization': "Bearer ${process.env.REACT_APP_OPENAI_API_KEY} ",
-          'Content-Type': 'application/json'
+          Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: "mistralai/mistral-7b-instruct",
+          model: "gpt-3.5-turbo",
           messages: [{ role: "user", content: question }]
         })
       });

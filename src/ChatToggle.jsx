@@ -65,7 +65,7 @@ speechRcognition();
        
 
        const response = await
-       fetch("https://api.openai.com/v1/chat/completions", {
+       fetch("/.netlify/functions/openai", {
         method: "post",
         headers: {
             authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,

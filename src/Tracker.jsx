@@ -65,7 +65,7 @@ const Tracker = () => {
     setLoading(true);
     setSummary("");
     try {
-      const response = await fetch("https://api.openai.com/api/v1/chat/completions", {
+      const response = await fetch("/.netlify/functions/openai", {
         method: "POST",
         headers: {  
           Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
@@ -156,7 +156,7 @@ const Tracker = () => {
       Be concise, give the forecast in simple terms, and mention any clear trends.`;
 
     try {
-      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      const response = await fetch("/.netlify/functions/openai", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,

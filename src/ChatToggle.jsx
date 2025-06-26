@@ -18,15 +18,15 @@ const ChatToggle = () => {
     const [inputMode, setInputMode] = useState('text');
 
 const startListening = () => {
-    const speechRcognition = window.speechRecognition || window.webkitspeechRecognition;
+    const speechRecognition = window.speechRecognition || window.webkitspeechRecognition;
 
-    if(!speechRcognition) {
+    if(!speechRecognition) {
         alert("Speech recognition not supported on this browser.");
         return;
     }
 
     const recognition = new 
-speechRcognition();
+speechRecognition();
     recognition.lang = "en-US";
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
@@ -49,54 +49,42 @@ speechRcognition();
 
 
     const sendMessages = async () => {
-       if (!input.trim()) return;
+  if (!input.trim()) return;
 
-       const userMessage = { role: 'user', text: input };
-       setMessages((prev) => [...prev, userMessage]);
-       setInput('');
-       const updatedMessages = [...messages, userMessage];
+  const userMessage = { role: 'user', text: input };
+  const updatedMessages = [...messages, userMessage];
+  setMessages(updatedMessages);
+  setInput('');
+  setIsLoading(true);
 
-       const newMessages = [... messages,
-        {role: 'user', text: input}
-       ];
-       setInput('');
-       setIsLoading(true);
+  try {
+    const response = await fetch("/.netlify/functions/openai", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        messages: updatedMessages.map(msg => ({
+            role: msg.role === "bot" ? "assistant" : "user",
+            content: msg.text
+        }))
+      })
+    });
 
-       
+    const data = await response.json();
 
-       const response = await
-       fetch("/.netlify/functions/openai", {
-        method: "post",
-        headers: {
-            authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
-            "content-type": "application/json",
-        },
-
-        body: JSON.stringify({
-            model: "gpt-3.5-turbo",
-            messages: updatedMessages.map(msg => ({
-                'user' : 'assistant',
-                content: msg.text
-            }))
-        })
-
-       });
-
-
-       const data = await response.json();
-       const reply = 
-       data.choices[0].message.content;
-       setMessages([...newMessages, {
-        role: 'bot', text: reply
-       }]); 
-      /*
-       catch (error) {
-        console.error("Error fetching response", error);
-       }
-*/
-       setIsLoading(false);
-    };
-
+    if (data.result) {
+      setMessages([...updatedMessages, { role: 'bot', text: data.result }]);
+    } else {
+      setMessages([...updatedMessages, { role: 'bot', text: "⚠️ AI failed to respond." }]);
+    }
+  } catch (error) {
+    console.error("Error fetching AI response:", error);
+    setMessages([...updatedMessages, { role: 'bot', text: "⚠️ Error contacting AI." }]);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
 
 
@@ -123,7 +111,7 @@ speechRcognition();
                 { isLoading && <div className='loading-spinner'>⌛ Rexis is thinking...</div>}
 
                 </div>
-                {/* Toggle between text and voice */}
+                
 
                 <div className='toggle-mode'>
                     <label>
@@ -136,7 +124,7 @@ speechRcognition();
                     </label>
                 </div>
 
-                {/* input area here */}
+                
                 <div className='chat-input'>
                     {inputMode === 'text' ? (
                         <>

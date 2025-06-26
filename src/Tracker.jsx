@@ -68,11 +68,10 @@ const Tracker = () => {
       const response = await fetch("/.netlify/functions/openai", {
         method: "POST",
         headers: {  
-          Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: "gpt-3.5-turbo",
+          
           messages: [
             {
               role: "user",
@@ -90,10 +89,10 @@ const Tracker = () => {
       if (!response.ok) throw new Error(`Error: ${response.statusText}`);
 
       const data = await response.json();
-      const summaryText = data.choices?.[0]?.message?.content;
+      const summaryText = data.choices;
       setSummary(summaryText);
 
-      // Parse numbers for chart
+      
       const extractedNumbers = summaryText.match(/\d+(\.\d+)?/g);
       const [sales, expenses, profit] = extractedNumbers ? extractedNumbers.map((num) => parseFloat(num)) : [0, 0, 0];
 
@@ -159,17 +158,17 @@ const Tracker = () => {
       const response = await fetch("/.netlify/functions/openai", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
+          
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: "gpt-3.5-turbo",
+          
           messages: [{ role: "user", content: prompt }],
         }),
       });
 
       const data = await response.json();
-      const forecast = data.choices?.[0]?.message?.content;
+      const forecast = data.choices;
       if (forecast) {
         setForecastResult(forecast);
       } else {

@@ -16,16 +16,13 @@ const Guide = () => {
       const response = await fetch("/.netlify/functions/openai", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
+          
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          model: "gpt-3.5-turbo",
-          messages: [{ role: "user", content: question }]
-        })
+        body: JSON.stringify({ prompt: question})
       });
       const data = await res.json();
-      setReply(data.choices[0].message.content);
+      setReply(data.result);
     } catch {
       setReply('Chat failed.');
     } finally {

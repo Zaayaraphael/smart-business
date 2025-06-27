@@ -42,14 +42,14 @@ My Smart Business Tracker is a simple yet powerful business tracking app built f
 
 ## 📸 Screenshots
 
-### 🏠 Home Page/My Tracker
-![Home page/My Tracker](public/mytracker.jpg)
+### 🏠 Home Page/My Smart Business Tracker
+![Home page/My Smart Business Tracker](public/mytracker.png)
 
-### ➕ AI start up Guide
-![AI start up Guide](public/startupai.jpg)
+### ➕ Receipt Generator
+![Receipt Generator](public/receipt.png)
 
-### 🤖 Business Tips
-![Business Tips](public/biztip.jpg)
+### 🤖 My Chatbox
+![Chatbox](public/chatbox.png)
 
 ## 💡 inspiration
 

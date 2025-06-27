@@ -63,6 +63,7 @@ this app was built as part of a software development challenge to empower small 
 frontend developer | tech enthusiast | small business advocate  
 github: [@zaayaraphael](https://github.com/zaayaraphael)
 email: [@raphaelzaaya1](raphaelzaaya1@gmail.com)
+LinkedIn: [@zaaya-raphael](https://linkedln.com/in/zaaya-raphael)
 
 
 ## 📬 feedback & contributions

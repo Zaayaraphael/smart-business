@@ -89,7 +89,7 @@ const Tracker = () => {
       if (!response.ok) throw new Error(`Error: ${response.statusText}`);
 
       const data = await response.json();
-      const summaryText = data.choices;
+      const summaryText = data.result;
       setSummary(summaryText);
 
       
@@ -168,7 +168,7 @@ const Tracker = () => {
       });
 
       const data = await response.json();
-      const forecast = data.choices;
+      const forecast = data.result;
       if (forecast) {
         setForecastResult(forecast);
       } else {

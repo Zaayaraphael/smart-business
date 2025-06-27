@@ -25,14 +25,14 @@ exports.handler = async (event, context) => {
       }
     );
 
+    const aiReply = response.data.choices?.[0]?.message?.content;
+
     return {
       statusCode: 200,
-      body: JSON.stringify({
-        result: response.data.choices[0].message.content, 
-      }),
+      body: JSON.stringify({ result: aiReply }),
     };
   } catch (err) {
-    console.error("OpenAI error:", err.message);
+    console.error("OpenAI error:", err.response?.data || err.message);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: "Failed to get AI response" }),

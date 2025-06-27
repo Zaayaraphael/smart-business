@@ -1,11 +1,11 @@
 # Markdown #
 
 
-# 📊 Ter Business — Smart Business Tracker App# 📊 ter business — smart business tracker app
+# 📊 My Smart Business Tracker App# 📊 ter business — smart business tracker app
 
-**live demo:** [click here to use the app](https://zaayaraphael.github.io/ter-business/)
+**live demo:** [click here to use the app](https://smartbusinesstrack.netlify.app/)
 
-Ter business is a simple yet powerful business tracking app built for small business owners, students, and entrepreneurs. it helps users manage daily sales and expenses, calculate profits, generate receipts, and even receive ai-powered business advice — all in one place.
+My Smart Business Tracker is a simple yet powerful business tracking app built for small business owners, students, and entrepreneurs. it helps users manage daily sales and expenses, calculate profits, generate receipts, and even receive ai-powered business advice — all in one place.
 
 
 
@@ -16,6 +16,8 @@ Ter business is a simple yet powerful business tracking app built for small busi
 - ✅ save business data in your browser (no login required)  
 - ✅ generate and print receipts easily  
 - ✅ get personalized ai-generated business advice  
+✅ smart business health prediction & sales forecasting
+✅ chat box  
 - ✅ access helpful business tips and startup guides  
 - ✅ clean and simple user interface  
 - ✅ responsive design for desktop and mobile  
@@ -34,7 +36,6 @@ Ter business is a simple yet powerful business tracking app built for small busi
 - 🔒 user authentication & login system (with firebase or supabase)  
 - 📊 dynamic graphs and charts for visual insights  
 - 💾 cloud storage for saving data across devices  
-- 🧠 smart business health prediction & sales forecasting  
 - 🧰 admin dashboard with filters and search  
 - 📈 export reports in pdf/csv format
 
@@ -61,6 +62,7 @@ this app was built as part of a software development challenge to empower small 
 *Raphael Zaaya*  
 frontend developer | tech enthusiast | small business advocate  
 github: [@zaayaraphael](https://github.com/zaayaraphael)
+email: [@raphaelzaaya1](raphaelzaaya1@gmail.com)
 
 
 ## 📬 feedback & contributions

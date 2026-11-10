@@ -1,66 +1,72 @@
+import { useState } from 'react';
+import { ChevronDown, Lightbulb, Megaphone, PackageCheck, Sparkles, UsersRound } from 'lucide-react';
 
-import React, { useState } from 'react';
+const categories = [
+  {
+    title: 'Know your numbers',
+    icon: PackageCheck,
+    description: 'Small, steady habits make clearer decisions possible.',
+    tips: [
+      ['Record it while it’s fresh', 'Capture each sale and expense on the day it happens. A two-minute habit helps you trust your numbers at the end of the week.'],
+      ['Check profit, not just sales', 'Sales show what came in, but profit accounts for what went out. Review both before making a big spending decision.'],
+    ],
+  },
+  {
+    title: 'Bring customers back',
+    icon: UsersRound,
+    description: 'Build relationships that keep your business memorable.',
+    tips: [
+      ['Ask one useful question', 'A quick, specific question after a purchase can reveal what customers value and what you can improve.'],
+      ['Make returning easy', 'Thank repeat customers and let them know when a product they like is available again. Consistency builds trust.'],
+    ],
+  },
+  {
+    title: 'Market with intention',
+    icon: Megaphone,
+    description: 'Spend your time sharing what makes your offer useful.',
+    tips: [
+      ['Show the product in action', 'A clear photo or short demonstration can explain the value of your product better than a long caption.'],
+      ['Notice what gets a response', 'Try a few types of posts, then focus on the ones that lead to real conversations and sales.'],
+    ],
+  },
+];
 
 const Tips = () => {
-  const tips = {
-    Marketing: ["Use social media", "Offer promotions"],
-    Inventory: ["Track items daily", "Avoid overstocking"],
-    Customers: ["Collect feedback", "Reward loyal buyers"]
-  };
-  const [expandedTip, setExpandedTip] = useState(null);
-
-  const tip = [
-    {
-      id: 1,
-      title: 'Keep daily records of sales and expenses.',
-      details: 'To keep daily records, start by using a simple logbook or digital tool where you record every sale and expense as it happens. Consistency is key. At the end of the day, review your entries to ensure nothing is missing.'
-    },
-    {
-      id: 2,
-      title: 'Set saving goals and stick to them.',
-      details: 'Determine a specific percentage of your profit to save daily or weekly. Set this money aside in a separate savings account or wallet and avoid dipping into it unless absolutely necessary.'
-    },
-    {
-      id: 3,
-      title: 'Reinvest profit into high-performing products.',
-      details: 'Identify which products are selling the most and consider buying more stock or improving their quality. This helps grow your revenue over time.'
-    },
-    {
-      id: 4,
-      title: 'Minimize unnecessary spending.',
-      details: 'Review your expenses regularly and identify costs that can be reduced or eliminated, such as excessive packaging or non-essential items.'
-    }
-  ];
-
-  const toggleTip = (id) => {
-    setExpandedTip(expandedTip === id ? null : id);
-  };
+  const [expandedTip, setExpandedTip] = useState('Record it while it’s fresh');
 
   return (
-    <div className="page">
-      <h2>Business Tips</h2>
-      {Object.entries(tips).map(([topic, details]) => (
-        <details key={topic}>
-          <summary>{topic}</summary>
-          <ul>
-            {details.map((tip, i) => <li key={i}>{tip}</li>)}
-          </ul>
-        </details>
-      ))}
-    
-
-    <div className='page-section'>
-      <h2>Tips to Save and Grow Your Business</h2>
-      <ul>
-        {tip.map((tip) => (
-          <li key={tip.id} onClick={() => toggleTip(tip.id)} style={{ cursor: 'pointer', marginBottom: '1em'   }}>
-            <strong>{tip.title}</strong>
-            {expandedTip === tip.id && <p style={{ marginTop: '0.5em' }}>{tip.details}</p>}
-          </li>
+    <div className="subpage">
+      <section className="welcome-row">
+        <div>
+          <p className="eyebrow"><span className="eyebrow-dot" /> SMALL STEPS, REAL MOMENTUM</p>
+          <h1>Good ideas for <span>growing steadily.</span></h1>
+          <p className="welcome-copy">Practical reminders to help you run your business with more confidence.</p>
+        </div>
+      </section>
+      <section className="tips-grid">
+        {categories.map(({ title, icon: Icon, description, tips }, index) => (
+          <article className="panel tip-category" key={title}>
+            <div className={`tip-category-icon tip-tone-${index}`}><Icon size={20} /></div>
+            <h2>{title}</h2>
+            <p className="tip-description">{description}</p>
+            <div className="tip-accordion">
+              {tips.map(([tipTitle, details]) => {
+                const isOpen = expandedTip === tipTitle;
+                return (
+                  <div className={`tip-item${isOpen ? ' tip-open' : ''}`} key={tipTitle}>
+                    <button type="button" className="tip-trigger" aria-expanded={isOpen} onClick={() => setExpandedTip(isOpen ? null : tipTitle)}>
+                      <span>{tipTitle}</span><ChevronDown size={16} />
+                    </button>
+                    {isOpen && <p className="tip-details">{details}</p>}
+                  </div>
+                );
+              })}
+            </div>
+          </article>
         ))}
-      </ul>
-      </div>
-      </div>
+      </section>
+      <aside className="tips-note"><span><Lightbulb size={19} /></span><p><strong>One thing at a time.</strong> Pick one idea that fits your business today. You can always come back for another.</p><Sparkles className="tips-note-sparkle" size={18} /></aside>
+    </div>
   );
 };
 
